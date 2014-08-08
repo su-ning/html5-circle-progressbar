@@ -12,89 +12,89 @@
 </head>
 
 <body>
-	<div class="progressbar" data-width="150" data-height="150" data-linewidth="15" data-percent="20"></div>
-	<div class="progressbar" data-width="200" data-height="200" data-linewidth="20" data-percent="50"></div>
-	<div class="progressbar" data-width="240" data-height="240" data-linewidth="20" data-percent="85"></div>
-	<div class="progressbar" data-width="300" data-height="300" data-linewidth="30" data-percent="100"></div>
-	
-	<script type='text/javascript'>
-	var bars = document.getElementsByClassName('progressbar'),
-		createProgressBar = function(bar) {
-			var options = {
-					start: 0,
-					width: bar.getAttribute('data-width') || 300,
-					height: bar.getAttribute('data-height') || 300,
-					percent: bar.getAttribute('data-percent') || 85,
-					lineWidth: bar.getAttribute('data-linewidth') || 20
-				},
-				canvas = document.createElement('canvas'),
-				paper = canvas.getContext('2d'),
-				span = document.createElement('span'),
-				radius = (options.width - options.lineWidth) / 2,
-				color = paper.createLinearGradient(0, 0, options.width, 0),
-				step = 1.5;
+<div class="progressbar" data-width="150" data-height="150" data-linewidth="15" data-percent="20"></div>
+<div class="progressbar" data-width="200" data-height="200" data-linewidth="20" data-percent="50"></div>
+<div class="progressbar" data-width="240" data-height="240" data-linewidth="20" data-percent="85"></div>
+<div class="progressbar" data-width="300" data-height="300" data-linewidth="30" data-percent="100"></div>
 
-			span.style.width =  bar.style.width = options.width + 'px';
-			span.style.height = bar.style.height = options.height + 'px';
+<script type='text/javascript'>
+var bars = document.getElementsByClassName('progressbar'),
+	createProgressBar = function(bar) {
+		var options = {
+				start: 0,
+				width: bar.getAttribute('data-width') || 300,
+				height: bar.getAttribute('data-height') || 300,
+				percent: bar.getAttribute('data-percent') || 85,
+				lineWidth: bar.getAttribute('data-linewidth') || 20
+			},
+			canvas = document.createElement('canvas'),
+			paper = canvas.getContext('2d'),
+			span = document.createElement('span'),
+			radius = (options.width - options.lineWidth) / 2,
+			color = paper.createLinearGradient(0, 0, options.width, 0),
+			step = 1.5;
 
-			canvas.width = options.width;
-			canvas.height = options.height;
+		span.style.width =  bar.style.width = options.width + 'px';
+		span.style.height = bar.style.height = options.height + 'px';
 
-			span.style.lineHeight = options.height + 'px';
+		canvas.width = options.width;
+		canvas.height = options.height;
 
-			color.addColorStop(0, "#ff6600");
-			color.addColorStop(0.5, "#ffff33");
-			color.addColorStop(1.0, "#66ff66");
+		span.style.lineHeight = options.height + 'px';
 
-			bar.appendChild(span);
-			bar.appendChild(canvas);
+		color.addColorStop(0, "#ff6600");
+		color.addColorStop(0.5, "#ffff33");
+		color.addColorStop(1.0, "#66ff66");
 
-			(function animat() {
+		bar.appendChild(span);
+		bar.appendChild(canvas);
 
-				span.textContent = options.start + '%';
-				createCircle(options, paper, radius, color, Math.PI * 1.5, Math.PI * step);
-				console.log(step);
+		(function animat() {
 
-				options.start++;
-				step += 0.02;
-				if (options.start <= options.percent)
-				{
-					setTimeout(animat, 10);
-				}
-			})();
+			span.textContent = options.start + '%';
+			createCircle(options, paper, radius, color, Math.PI * 1.5, Math.PI * step);
+			console.log(step);
 
-		},
-		createCircle = function(options, paper, radius, color, start, end) {
+			options.start++;
+			step += 0.02;
+			if (options.start <= options.percent)
+			{
+				setTimeout(animat, 10);
+			}
+		})();
 
-			paper.clearRect(
-				options.width / 2 - radius - options.lineWidth,
-				options.height / 2 - radius - options.lineWidth,
-				radius * 2 + (options.lineWidth * 2),
-				radius * 2 + (options.lineWidth * 2)
-			);
+	},
+	createCircle = function(options, paper, radius, color, start, end) {
 
-			paper.beginPath();
-			paper.arc(options.width / 2, options.height / 2, radius, 0, Math.PI * 2, false);
-			paper.strokeStyle = '#f4f4f4';
-			paper.lineCap = 'round';
-			paper.lineWidth = options.lineWidth;
-			paper.stroke();
-			paper.closePath();
+		paper.clearRect(
+			options.width / 2 - radius - options.lineWidth,
+			options.height / 2 - radius - options.lineWidth,
+			radius * 2 + (options.lineWidth * 2),
+			radius * 2 + (options.lineWidth * 2)
+		);
 
-			paper.beginPath();
-			paper.arc(options.width / 2, options.height / 2, radius, start, end, false);
-			paper.strokeStyle = color;
-			paper.lineCap = 'round';
-			paper.lineWidth = options.lineWidth;
-			paper.stroke();
-			paper.closePath();
-	};
+		paper.beginPath();
+		paper.arc(options.width / 2, options.height / 2, radius, 0, Math.PI * 2, false);
+		paper.strokeStyle = '#f4f4f4';
+		paper.lineCap = 'round';
+		paper.lineWidth = options.lineWidth;
+		paper.stroke();
+		paper.closePath();
 
-	for(var i = 0, len = bars.length;i < len; i++)
-	{
-		createProgressBar(bars[i]);
-	}
-	</script>
+		paper.beginPath();
+		paper.arc(options.width / 2, options.height / 2, radius, start, end, false);
+		paper.strokeStyle = color;
+		paper.lineCap = 'round';
+		paper.lineWidth = options.lineWidth;
+		paper.stroke();
+		paper.closePath();
+};
+
+for(var i = 0, len = bars.length;i < len; i++)
+{
+	createProgressBar(bars[i]);
+}
+</script>
 
 </body>
 
